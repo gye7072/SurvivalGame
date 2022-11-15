@@ -1,0 +1,68 @@
+Variables
+-int playerChoice
+directions and actions
+
+-int numDays
+-boolean isAlive
+-int dayHelpArrives
+At random(3-7) help arrives
+
+-int mental state
+max 5
+if mental state is 0 game over
+
+-int daysWithoutFood
+Max day 6
+death at day 6
+death at day 3 + withoutWater day 2
+
+
+-int daysWithoutWater
+-death at day 3
+day 3 mandatory
+
+-int HP
+For injuries incurred
+max = 5, major injuries =-2, minor injuries-1, death at 0 hp
+
+
+Constructor
+-AdventureGame
+numDays = 0
+daysWithoutFood = 0
+daysWithoutWater = 0
+hP = 5
+
+Object
+Player?
+
+//Quick Game/Medium Game/Long Game
+
+Method Names:
+int getFood
+int getWater
+int getRest
+All the above methods help allocate resources in an appropriate manner
+(without going above the max or below the min required for each resource)
+
+boolean isAlive
+helps check if the player is still alive
+
+int getNumDays
+checks what day it is
+
+boolean isEven
+helps randomize a 50/50 event
+
+void int generateDayHelpArrives
+-set dayHelpArrives to random 3-7
+
+String everyDay(playerChoice)
+-includes everything that may happen from day 1 to whenever help arrives
+
+String choiceResults (playerChoice)
+-contains all the choices can make and what happens as a result of it
+
+General algorithm
+asks user where they want to go (directions) and do(actions)
+return Game OVER or ESCAPE
