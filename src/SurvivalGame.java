@@ -2,6 +2,7 @@ public class SurvivalGame {
     private int numDays;
     public int dayHelpArrives;
     private int daysWithoutFood;
+    public String location;
     private int daysWithoutWater;
     private int HP;
     private int mentalState;
@@ -119,6 +120,7 @@ public class SurvivalGame {
             }else {
                 choiceN = "You decided to go to the abandoned hut. \nOverwhelmed by everything that happened so far, you take a nap. " +
                         "\nYour health and mental state improved a lot.";
+                location.equals("hut");
                 daysWithoutFood++;
                 daysWithoutWater++;
                 getRest();
@@ -135,6 +137,7 @@ public class SurvivalGame {
                         You ate some and managed to satiate your hunger and thirst by a bit.""";
                 getFood();
                 getWater();
+                location.equals("trees");
             } else {
                 choiceE = "You tried going to the trees to find some coconuts but despite a day filled with tireless effort you found none";
                 daysWithoutFood++;
@@ -152,6 +155,7 @@ public class SurvivalGame {
                 getWater();
                 getWater();
                 mentalState--;
+                location.equals("sea");
             } else {
                 int tenProbability = (int) ((Math.random() * 10) + 1);
                 if (tenProbability <= 9) {
@@ -163,6 +167,7 @@ public class SurvivalGame {
                     getWater();
                     getWater();
                     mentalState--;
+                    location.equals("sea");
                 } else {
                     choiceS = "You decided to go to the sea and try to filter the seawater to drinkable water. " +
                             "\nUnfortunately you met some wild sea monsters and were quickly eaten.";
@@ -187,6 +192,7 @@ public class SurvivalGame {
                 getFood();
                 daysWithoutWater++;
                 mentalState--;
+                location.equals("beasts");
             }
             numDays++;
             return choiceW;

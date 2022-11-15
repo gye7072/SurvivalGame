@@ -1,12 +1,16 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SurvivalGameRunner {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         SurvivalGame player = new SurvivalGame();
         player.generateDayHelpArrives();
+        List<String> inv = new ArrayList<String>();
         System.out.println();
         System.out.print("""
-                Welcome to an Adventure Game! Your goal is to survive until help arrives which can take 7 to 14 days.
+                Welcome to a Survival Game! Your goal is to survive until help arrives which can take 7 to 14 days.
                 To survive you need to take care of your health, shelter, food, water, and mental state.
                 If you go days without these things it can result in GAME OVER so please be careful and good luck.
                 """);
