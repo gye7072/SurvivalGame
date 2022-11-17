@@ -8,12 +8,12 @@ public class SurvivalGame {
     private int mentalState;
 
 
-    public SurvivalGame() {
-        mentalState = 5;
+    public SurvivalGame(int HP, int mentalState, int daysWithoutFood, int daysWithoutWater) {
+        this.mentalState = mentalState;
         numDays = 1;
-        daysWithoutFood = 0;
-        daysWithoutWater = 0;
-        HP = 5;
+        this.daysWithoutFood = daysWithoutFood;
+        this.daysWithoutWater = daysWithoutWater;
+        this.HP = HP;
     }
 
     public int getFood() {
@@ -90,19 +90,22 @@ public class SurvivalGame {
     }
 
     public String status() {
-        String status = "\nEnd of Day " + (numDays-1) + ": \nHP (Max 5): " + HP + "\nDays without food (Max 6): " + daysWithoutFood + "\nDays without water (Max 3): " + daysWithoutWater +
-                "\nMental State (Max 5): " + mentalState + "\n";
-        if(daysWithoutWater >= 2){
-            status += "\nYou are very thirsty.";
-        }
-        if(daysWithoutFood >3){
-            status += "\nYou are very hungry.";
-        }
-        if(mentalState <= 2){
-            status+= "\nYou are losing it.";
-        }
-        if(HP <= 2 && HP != 0){
-            status+= "\nYou are very low.";
+        String status = "\nEnd of Day " + (numDays - 1) + ": \nHP (Max 5): " + HP + "\nDays without food (Max 6): " + daysWithoutFood + "\nDays without water (Max 3): " + daysWithoutWater +
+                "\nMental State (Max 5): " + mentalState;
+        if ((daysWithoutWater >= 2) || (daysWithoutFood > 3) || (mentalState <= 2) || (HP <= 2 && HP != 0)) {
+            status += "\n";
+            if (daysWithoutWater >= 2) {
+                status += "\nYou are very thirsty.";
+            }
+            if (daysWithoutFood > 3) {
+                status += "\nYou are very hungry.";
+            }
+            if (mentalState <= 2) {
+                status += "\nYou are losing it.";
+            }
+            if (HP <= 2 && HP != 0) {
+                status += "\nYou are very low.";
+            }
         }
         return status;
     }
@@ -120,7 +123,7 @@ public class SurvivalGame {
             }else {
                 choiceN = "You decided to go to the abandoned hut. \nOverwhelmed by everything that happened so far, you take a nap. " +
                         "\nYour health and mental state improved a lot.";
-                location.equals("hut");
+                location = "hut";
                 daysWithoutFood++;
                 daysWithoutWater++;
                 getRest();
@@ -137,7 +140,7 @@ public class SurvivalGame {
                         You ate some and managed to satiate your hunger and thirst by a bit.""";
                 getFood();
                 getWater();
-                location.equals("trees");
+                location = "trees";
             } else {
                 choiceE = "You tried going to the trees to find some coconuts but despite a day filled with tireless effort you found none";
                 daysWithoutFood++;
@@ -155,7 +158,7 @@ public class SurvivalGame {
                 getWater();
                 getWater();
                 mentalState--;
-                location.equals("sea");
+                location = "sea";
             } else {
                 int tenProbability = (int) ((Math.random() * 10) + 1);
                 if (tenProbability <= 9) {
@@ -167,7 +170,7 @@ public class SurvivalGame {
                     getWater();
                     getWater();
                     mentalState--;
-                    location.equals("sea");
+                    location = "sea";
                 } else {
                     choiceS = "You decided to go to the sea and try to filter the seawater to drinkable water. " +
                             "\nUnfortunately you met some wild sea monsters and were quickly eaten.";
@@ -192,7 +195,7 @@ public class SurvivalGame {
                 getFood();
                 daysWithoutWater++;
                 mentalState--;
-                location.equals("beasts");
+                location = "beasts";
             }
             numDays++;
             return choiceW;
