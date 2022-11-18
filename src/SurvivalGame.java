@@ -6,15 +6,35 @@ public class SurvivalGame {
     private int daysWithoutWater;
     private int HP;
     private int mentalState;
+    private int maxHP;
+    private int maxMentalState;
+    private int attackPower;
+    private int beastAttackPower;
 
 
     public SurvivalGame(int HP, int mentalState, int daysWithoutFood, int daysWithoutWater) {
         this.mentalState = mentalState;
         numDays = 1;
+        this.maxHP = HP;
+        maxMentalState = mentalState;
         this.daysWithoutFood = daysWithoutFood;
         this.daysWithoutWater = daysWithoutWater;
         this.HP = HP;
     }
+    public SurvivalGame(int beastAttackPower){
+        this.beastAttackPower = beastAttackPower;
+    }
+
+    public String beastAttack(){
+        if(isEven()) {
+            HP -= beastAttackPower;
+            return "You lost " + beastAttackPower + " HP.";
+        }
+        else{
+            return "You managed to defend yourself and run away successfully.";
+        }
+    }
+
 
     public int getFood() {
         if (daysWithoutFood == 0) {
@@ -33,7 +53,7 @@ public class SurvivalGame {
     }
 
     public int getRest() {
-        if (mentalState == 5) {
+        if (mentalState == maxMentalState) {
             return mentalState;
         } else {
             return mentalState += 1;
@@ -41,7 +61,7 @@ public class SurvivalGame {
     }
 
     public int getHP() {
-        if (HP == 5) {
+        if (HP == maxHP) {
             return HP;
         } else {
             return HP += 1;
@@ -73,44 +93,83 @@ public class SurvivalGame {
     }
 
     public String gameOver() {
+        String gameOver = " ";
         if (!isAlive()) {
             if (HP <= 0) {
-                return "\nGame Over!" + "\nYou died from wild beasts! \nYou survived for " + (numDays - 1) + " day(s)";
+                gameOver += "\nYou died from wild beasts!";
             } else if (daysWithoutWater == 3) {
-                return "\nGame Over!" + "\nYou died from dehydration! \nYou survived for " + (numDays - 1) + " day(s)";
+                gameOver += "\nYou died from dehydration!";
             } else if (daysWithoutFood == 6) {
-                return "\nGame Over!" + "\nYou died from starvation! \nYou survived for " + (numDays - 1) + " day(s)";
+                gameOver += "\nYou died from starvation!";
             } else if (mentalState == 0) {
-                return "\nGame Over!" + "\nYou couldn't take it anymore! \nYou survived for " + (numDays - 1) + " day(s)";
-            } else if (daysWithoutFood >= 3 && daysWithoutWater >= 2) {
-                return "\nGame Over!" + "\nYou died from both hunger and thirst! \nYou survived for " + (numDays - 1) + " day(s)";
+                gameOver += "\nYou couldn't take it anymore!";
             }
+            return "\nGame Over!" + gameOver + "\nYou survived for " + (numDays - 1) + " day(s)";
         }
         return "";
     }
 
     public String status() {
-        String status = "\nEnd of Day " + (numDays - 1) + ": \nHP (Max 5): " + HP + "\nDays without food (Max 6): " + daysWithoutFood + "\nDays without water (Max 3): " + daysWithoutWater +
-                "\nMental State (Max 5): " + mentalState;
-        if ((daysWithoutWater >= 2) || (daysWithoutFood > 3) || (mentalState <= 2) || (HP <= 2 && HP != 0)) {
-            status += "\n";
-            if (daysWithoutWater >= 2) {
-                status += "\nYou are very thirsty.";
+        String status = "\nEnd of Day " + (numDays - 1) + ": \nHP (Max " + maxHP + "): " + HP + "\nDays without food (Max 6): "
+                + daysWithoutFood + "\nDays without water (Max 3): " + daysWithoutWater +
+                "\nMental State (Max " + maxMentalState + "): " + mentalState + "\n";
+            if (daysWithoutWater == 0) {
+                status += "\nYou are hydrated.";
             }
-            if (daysWithoutFood > 3) {
-                status += "\nYou are very hungry.";
+            if(daysWithoutWater == 1){
+                status += "\nYou are thirsty";
             }
-            if (mentalState <= 2) {
+            if(daysWithoutWater == 2){
+                status += "\nYOU NEED WATER RIGHT NOW!";
+            }
+            if(daysWithoutFood == 1 || daysWithoutFood == 2){
+                status += "\nYou are hungry";
+            }
+            if(daysWithoutFood == 3){
+                status += "\nYou are really hungry";
+            }
+            if(daysWithoutFood == 4){
+                status += "\nYou are extremely hungry";
+            }
+            if (daysWithoutFood == 5) {
+                status += "\nYOU NEED FOOD RIGHT NOW";
+            }
+            if(mentalState == 5){
+                status += "\nYou have a healthy mind";
+            }
+            if(mentalState == 4 || mentalState == 3){
+                status += "\nYour mind is deteriorating";
+            }
+            if (mentalState == 2) {
                 status += "\nYou are losing it.";
             }
+            if(mentalState == 1){
+                status += "\nYOU ARE GOING TO LOSE IT.";
             if (HP <= 2 && HP != 0) {
-                status += "\nYou are very low.";
+                status += "\nYou are an inch close to DEATH.";
             }
         }
         return status;
     }
 
+    public String getInstructionManual(){
+        String instruction = "";
+        instruction += "Your goal is survive on a stranded island until help arrives which can take 7 to 14 days."
+                + "\nTo survive you need to take care of your health, shelter, food, water, and mental state."
+                + "\nIf your health (HP) or your mental state reaches 0 its GAME OVER."
+                + "\nIf the number of days without food reaches 6 or the number of days without water reaches 3 its GAME OVER."
+                + "\nTo start you are given " + getHP() + " HP" + ", " + getRest() + " \"mental state\"" + ", "
+                + getFood() + " hunger" + " and " + getWater() + " thirst.\n";
+
+        instruction += "\nThe hut can recover 1 HP and 1 mental state per visit.\nThe sea can alleviate two days without water per visit." +
+                "\nThe trees can alleviate one day without water and food per visit." +
+                "\nThe signs of wild beasts can alleviate two days without food per visit.";
+
+        return instruction;
+    }
+
     public String choiceResults(String playerChoice) {
+        location = "";
         if (playerChoice.equals("hut")) {
             String choiceN;
             int maxTenProbability = (int) ((Math.random() * 10) + 1);
@@ -123,7 +182,6 @@ public class SurvivalGame {
             }else {
                 choiceN = "You decided to go to the abandoned hut. \nOverwhelmed by everything that happened so far, you take a nap. " +
                         "\nYour health and mental state improved a lot.";
-                location = "hut";
                 daysWithoutFood++;
                 daysWithoutWater++;
                 getRest();
@@ -140,7 +198,6 @@ public class SurvivalGame {
                         You ate some and managed to satiate your hunger and thirst by a bit.""";
                 getFood();
                 getWater();
-                location = "trees";
             } else {
                 choiceE = "You tried going to the trees to find some coconuts but despite a day filled with tireless effort you found none";
                 daysWithoutFood++;
@@ -158,14 +215,11 @@ public class SurvivalGame {
                 getWater();
                 getWater();
                 mentalState--;
-                location = "sea";
             } else {
                 int tenProbability = (int) ((Math.random() * 10) + 1);
                 if (tenProbability <= 9) {
                     choiceS = "You decided to go to the sea and try to filter the seawater to drinkable water. " +
-                            "\nYou unfortunately met some wild sea monsters however you were able to defend yourself" +
-                            " although you received some major injuries.";
-                    HP = HP - 2;
+                            "\nYou unfortunately met some wild sea monsters so you attempt to defend yourself.";
                     daysWithoutFood++;
                     getWater();
                     getWater();
@@ -199,6 +253,8 @@ public class SurvivalGame {
             }
             numDays++;
             return choiceW;
+        } else if(playerChoice.equals("instruction manual")){
+            return getInstructionManual();
         }
         return "This is an invalid response. Please try again.";
     }
