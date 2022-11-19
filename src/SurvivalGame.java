@@ -2,7 +2,7 @@ public class SurvivalGame {
     private int numDays;
     public int dayHelpArrives;
     private int daysWithoutFood;
-    public String beastLocation;
+    public String beastLocation = "";
     private int daysWithoutWater;
     private int mentalState;
     private int maxHP;
@@ -43,13 +43,12 @@ public class SurvivalGame {
 
     /**
      * beastAttack method for the SurvivalGame class. This method will return a String that
-     * shows how many health points has after a beast attacked the player.
+     * shows how much health points the player lost after a beast attacked the player.
      *
-     * @return returns a String that displays the amount of health points a player has after a beast attacked them.
+     * @return returns a String that displays the amount of health points a player lost after a beast attacked them.
      */
     public String beastAttack(){
-        HP = HP - beastAttackPower;
-        return "\nYou have " + HP + " HP left.";
+        return "\nYou lost " + beastAttackPower + " HP.";
     }
 
     /**
@@ -275,6 +274,7 @@ public class SurvivalGame {
      */
 
     public String choiceResults(String playerChoice) {
+        beastLocation = "";
         if (playerChoice.equals("hut")) {
             String choiceN;
             int maxTenProbability = (int) ((Math.random() * 10) + 1);

@@ -31,7 +31,7 @@ public class SurvivalGameRunner {
             if(player.beastLocation.equals("beasts")){
                System.out.println(landBeast.beastAttack());
             }
-            if (player.beastLocation.equals("sea")){
+            if (player.beastLocation.equals("sea")) {
                 System.out.println(seaBeast.beastAttack());
             }
             if((player.getNumDays()-1 != 0)){
