@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class SurvivalGameRunner {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        SurvivalGame player = new SurvivalGame(5,5,0,0);
-        SurvivalGame beast = new SurvivalGame(2);
+        SurvivalGame player = new SurvivalGame(5,5,0,0,2);
+        SurvivalGame landBeast = new SurvivalGame(5,2);
+        SurvivalGame seaBeast = new SurvivalGame(5,2);
         player.generateDayHelpArrives();
         System.out.println();
         System.out.print("Welcome to a Survival Game! Your goal is to survive on a stranded island until help arrives which can take 7 to 14 days."
@@ -27,11 +28,14 @@ public class SurvivalGameRunner {
             + "\nIf you wish to see the instruction manual again, please enter \"instruction manual\"");
             String playerChoice = s.nextLine();
             System.out.println(player.everyday(playerChoice));
-            if((player.location.equals("sea") || player.location.equals("beasts"))){
-               System.out.println(beast.beastAttack());
+            if(player.beastLocation.equals("beasts")){
+               System.out.println(landBeast.beastAttack());
+            }
+            if (player.beastLocation.equals("sea")){
+                System.out.println(seaBeast.beastAttack());
             }
             if((player.getNumDays()-1 != 0)){
-                System.out.println(player.status());
+                System.out.println(player.toString());
             }
             System.out.println(player.gameOver());
         }

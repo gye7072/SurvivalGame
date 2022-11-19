@@ -1,68 +1,113 @@
 Variables
--int playerChoice
-directions and actions
-
 -int numDays
--boolean isAlive
+-int beastLocation
+tracks location where beasts appeared.
+
 -int dayHelpArrives
 At random(3-7) help arrives
-
--int mental state
-max 5
-if mental state is 0 game over
 
 -int daysWithoutFood
 Max day 6
 death at day 6
 death at day 3 + withoutWater day 2
-
+death at day 0 + withoutWater day 3
 
 -int daysWithoutWater
 -death at day 3
-day 3 mandatory
 
--int HP
+-int mentalState
+Max 5, death at 0
+-int maxHP
+-int maxMentalState
+-int beastAttackPower
+-beast strength
+
+-int playerHP
 For injuries incurred
-max = 5, major injuries =-2, minor injuries-1, death at 0 hp
+max = 5, beastinjuries =-2, death at 0 hp
 
 
 Constructor
--AdventureGame
-numDays = 0
-daysWithoutFood = 0
-daysWithoutWater = 0
-hP = 5
+-public SurvivalGame
+Parameters:
+mentalState, playerHP, hunger, thirst, beastattkPower
 
-Object
-Player?
+-public SurvivalGame
+Parameters:
+playerHP, beastAttkPower
 
-//Quick Game/Medium Game/Long Game
 
-Method Names:
-int getFood
-int getWater
-int getRest
-All the above methods help allocate resources in an appropriate manner
-(without going above the max or below the min required for each resource)
 
-boolean isAlive
-helps check if the player is still alive
 
-int getNumDays
-checks what day it is
 
-boolean isEven
-helps randomize a 50/50 event
+Method Names
+String beastAttack
+Cause major injuries and decrease playerHP when beast appears
+
+Int getFood
+Decrease hunger
+
+Int getWater
+Decrease thirst
+
+Int getRest
+Increase mental state
+
+Int getHP
+Increase HP
+
+Boolean isALive
+Checks if player is alive
+
+Int getNumDays
+Returns what day it is
+
+Boolean isEven
+50/50 probability
 
 void int generateDayHelpArrives
--set dayHelpArrives to random 3-7
+-set dayHelpArrives to random 7-14
 
-String everyDay(playerChoice)
--includes everything that may happen from day 1 to whenever help arrives
+String gameOver
+If user dies display game over
 
-String choiceResults (playerChoice)
--contains all the choices can make and what happens as a result of it
+String toString
+Display status of player after day ended
 
-General algorithm
-asks user where they want to go (directions) and do(actions)
-return Game OVER or ESCAPE
+String getInstructionManual
+Display the rules of the game
+
+String choiceResults
+Encompasses all the different outcomes that can be displayed from user input
+
+String everyDay
+Returns choiceResults as long as Day is less than or equal to 14.
+
+
+
+General algorithm:
+Import Scanner class
+Create a new object called player
+Create a new object called landBeast
+Create a new object called seaBeast
+Call the method generatedayHelpArrives
+
+Display the instructions about how to play the game
+
+Add a while loop that runs while the numDays is less than or equal to the day that help arrives and while the player is still alive
+Inside the while Loop
+Tell the user what day it is and what the user can do like accessing instructions and moving locations
+Store the user input as playerChoice
+Call the method everyday(playerChoice)
+Check if the location the beast appears is in the “beasts” area or the “sea” area
+Then call the method beastAttack using the right object accordingly
+Call the method toString
+Call the method gameOver
+
+Outside the while Loop
+Check if player is still alive and if so display congratulations
+
+
+
+
+
