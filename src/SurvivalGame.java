@@ -342,7 +342,7 @@ public class SurvivalGame {
         } else if (playerChoice.equals("beasts")) {
             String choiceW;
             int count = numDays + 1;
-            int maxTenProbability = (int) ((Math.     random() * count) + 1);
+            int maxTenProbability = (int) ((Math.random() * count) + 1);
             if (maxTenProbability == count) {
                 choiceW = "You end up going to where there are signs of wild beasts and find yourself encountering a wild hungry beast." +
                         "\nYou try to defend yourself and run away but your inexperience made you an easy target and you were quickly eaten.";

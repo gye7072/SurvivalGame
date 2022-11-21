@@ -1,0 +1,113 @@
+Variables
+-int numDays
+-int beastLocation
+tracks location where beasts appeared.
+
+-int dayHelpArrives
+At random(3-7) help arrives
+
+-int daysWithoutFood
+Max day 6
+death at day 6
+death at day 3 + withoutWater day 2
+death at day 0 + withoutWater day 3
+
+-int daysWithoutWater
+-death at day 3
+
+-int mentalState
+Max 5, death at 0
+-int maxHP
+-int maxMentalState
+-int beastAttackPower
+-beast strength
+
+-int playerHP
+For injuries incurred
+max = 5, beastinjuries =-2, death at 0 hp
+
+
+Constructor
+-public SurvivalGame
+Parameters:
+mentalState, playerHP, hunger, thirst, beastattkPower
+
+-public SurvivalGame
+Parameters:
+playerHP, beastAttkPower
+
+
+
+
+
+Method Names
+String beastAttack
+Cause major injuries and decrease playerHP when beast appears
+
+Int getFood
+Decrease hunger
+
+Int getWater
+Decrease thirst
+
+Int getRest
+Increase mental state
+
+Int getHP
+Increase HP
+
+Boolean isALive
+Checks if player is alive
+
+Int getNumDays
+Returns what day it is
+
+Boolean isEven
+50/50 probability
+
+void int generateDayHelpArrives
+-set dayHelpArrives to random 7-14
+
+String gameOver
+If user dies display game over
+
+String toString
+Display status of player after day ended
+
+String getInstructionManual
+Display the rules of the game
+
+String choiceResults
+Encompasses all the different outcomes that can be displayed from user input
+
+String everyDay
+Returns choiceResults as long as Day is less than or equal to 14.
+
+
+
+General algorithm:
+Import Scanner class
+Create a new object called player
+Create a new object called landBeast
+Create a new object called seaBeast
+Call the method generatedayHelpArrives
+
+Display the instructions about how to play the game
+
+Add a while loop that runs while the numDays is less than or equal to the day that help arrives and while the player is still alive
+Inside the while Loop
+Tell the user what day it is and what the user can do like accessing instructions and moving locations
+Store the user input as playerChoice
+Call the method everyday(playerChoice)
+Check if the location the beast appears is in the “beasts” area or the “sea” area
+Then call the method beastAttack using the right object accordingly
+Call the method toString
+Call the method gameOver
+
+Outside the while Loop
+Check if player is still alive and if so display congratulations
+
+
+
+
+
